@@ -1,5 +1,3 @@
-from Optimizer2.ritmos import Samba
-from Optimizer2.testing import model
 import pulp as pl
 import numpy as np
 import math, itertools
@@ -271,15 +269,6 @@ class Optimizer:
             
             solutions.append([temp_sol, (X, Y), self.__get_loop_solutions() if self.loop else self.__get_default_solutions()])
             
-            print(f"X : {[(x, int(index / self.__original_length), index % self.__original_length) for (index, x) in self.X.items() if x.varValue and x.varValue > 0]}")
-
-            print(f"Y : {[(x, int(index / self.__original_length), index % self.__original_length) for (index, x) in self.Y.items() if x.varValue and x.varValue > 0]}")
-
-            t = time.time()
-            model([self.times[0], self.times[self.__original_length - 1]], [0.53405896, 5.80498866], solutions[-1][2], Samba, 4)
-            count +=1
-            temp += time.time() - t
-            print(f"Iter: {count} Time: {temp} Average: {temp/count}")
         #     # self.get_all_permutation_solution(temp_sol)
             _solutions = self.get_all_permutation_solution(temp_sol)
         #     # print('#'*100)
